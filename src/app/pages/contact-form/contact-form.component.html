@@ -1,0 +1,68 @@
+<div class="container  mt-4">
+    <div class="card">
+        <div class="card-header"><h6>Form with template-driven validation</h6></div>
+        <div class="card-body">
+            <form #f="ngForm" (ngSubmit)="submit(f)">
+                <div ngModelGroup="contact" #contact="ngModelGroup">
+                    <!--If an ngModelGroup is defined, the value property will have a property with the name of the ngModel, and the 
+                        ngModel will have a property with the name of the input defined as ngModel
+                        In this case, value could be accessed as value.contact.firstName
+                        The ngModelGroup will be valid only if all the inputs inside the group are valid, so an option to show the error messages
+                        could be at the top, by adding a contact.valid validation like below
+                    -->
+                    <div class="alert alert-danger" *ngIf="contact.touched && !contact.valid">...</div>
+                    <div class="form-group">
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input required  minlength="3" maxlength="20" pattern="banana" ngModel name="firstName" id="firstName" #firstName="ngModel" type="text" class="form-control">
+                            <!-- The div below show the error messages depending on the result of the validation -->
+                            <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+                                <!--The ?. allows Angular to validate before if the property is null, if not, then do the validation -->
+                                <div *ngIf="firstName.errors?.['required']">First name is required</div>
+                                <div *ngIf="firstName.errors?.['minlength']">First name requires at least 3 characters</div>
+                                <div *ngIf="firstName.errors?.['pattern']">First name doesn't match the pattern</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">Comment</label>
+                            <textarea ngModel name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>
+                        </div>
+                        <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ngModel name="isSubscribed"> Subscribe to mailing list
+                                </label>
+                        </div>
+                        <!--Below is a dropdown-->
+                        <div class="form-group">
+                            <label for="contactMethod">Select the contact method</label>
+                            <select ngModel name="contactMethod" id="contactMethod" class="form-control">
+                            <!-- Use the line below to allow multiple options on the dropdown-->
+                            <!--<select multiple ngModel name="contactMethod" id="contactMethod" class="form-control"> -->
+                                <option></option>
+                                <!--In regular applications, use the [value]="method.id" option as it's easier to handle
+                                    the code below binds an object, which allows to send the whole object to the server
+                                    but it's not recommended.
+                                -->
+                                <option *ngFor="let method of contactMethods" [ngValue]="method">{{method.name}}</option>
+                            </select>
+                        </div>
+                        <div *ngfor="let method of contactMethods" class="radio">
+                            <label>
+                                <input ngModel type="radio" name="contactMethod2" [value]="method.id">
+                                {{method.name}}
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+                    </div>
+                </div>
+                <!-- The following couple of lines can be used as a "debugger" - it allows the developer to see the content of the 
+                    object in case there's some validation required
+                    The f.value will return an object and the pipe (|) and json will format the object to json
+                -->
+                <p>
+                    {{f.value | json}}
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

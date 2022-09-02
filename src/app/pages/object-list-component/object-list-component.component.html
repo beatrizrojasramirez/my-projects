@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="callout">
+        <h4>Contact form example</h4>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h6>Form with more than 1 input, including a list of objects</h6>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="form">
+                <div class="grid">
+                    <div class="mb-3">
+                        <label for="iName" class="form-label">Name</label>
+                        <input formControlName="name" id="iName" class="form-control"/>
+                        <div formGroupName="contact" class="row">
+                            <div class="col">
+                                <label for="iEmail" class="form-label">Email</label>
+                                <input id="iEmail" formControlName="email" class="form-control"/>
+                            </div>
+                            <div class="col">
+                                <label for="iPhone" class="form-label">Phone</label>
+                                <input id="iPhone" formControlName="phone" class="form-control"/>
+                            </div>
+                        </div>
+                        <label for="iList">Topics</label>
+                        <input id="iList" type="text" class="form-control" (keyup.enter)="addMyItem(mItem)" #mItem>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let mI of getListItems(); let i=index">
+                                {{mI.value}}
+                                <i class="bi bi-x" (click)="removeMyItem(i)"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

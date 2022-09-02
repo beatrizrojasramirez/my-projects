@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg bg-light sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/" routerLinkActive="active" *ngIf="!authservice.isLoggedIn()">
+        <i class="bi bi-house-fill mb-1"></i>
+        Home
+      </a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="authservice.isLoggedIn()">
+          <span class="me-2"><strong>Welcome </strong>{{authservice.currentUser.name}}</span>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" routerLinkActive="active" routerLink="/followers" [queryParams]="{page: 1, order:'newest'}">Followers</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" routerLinkActive="active" routerLink="/posts">Posts</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" routerLinkActive="active" routerLink="/formexamples" *ngIf="authservice.currentUser.role === 'security-admin'">Client info</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" routerLinkActive="active" routerLink="/doubleform">Change password & Contact Form</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" routerLinkActive="active" routerLink="/archives">Blog archives</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" routerLinkActive="active" routerLink="/orders" *ngIf="authservice.currentUser.role === 'security-admin'">Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="" (click)="authservice.logout()">Logout</a>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </nav>

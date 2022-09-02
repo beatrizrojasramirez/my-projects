@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="callout">
+        <h4>Followers Assignment</h4>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <strong>These are my followers</strong>
+        </div>
+        <div class="card-body">
+            <ul class="list-group w-auto">
+                <li class="list-group-item w-auto" *ngFor="let follower of followers; let i = index">
+                    <div class="hstack gap-2 mb-3">
+                        <a [routerLink]="['/followers',follower.id, follower.login,i]"><img src="{{follower.avatar_url}}" alt="{{follower.login}}" class="rounded-circle avatar" ></a>
+                        <div class="overflow-hidden">
+                            <p class="h6 mb-0">{{follower.login}}</p>
+                            <a href="{{follower.html_url}}" class="mb-0 small">{{follower.html_url}}</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

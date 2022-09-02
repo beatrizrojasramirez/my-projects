@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="callout">
+        <h4>Meet {{follower.login}}</h4>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="hstack gap-2">
+                    <img src="{{follower.avatar_url}}" alt="{{follower.login}}" class="rounded-circle avatar" >
+                    <div class="overflow-hidden">
+                        <p class="h6 mb-0">{{follower.login}}</p>
+                        <a href="{{follower.html_url}}" class="mb-0 small">{{follower.html_url}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-sm">
+                <tbody>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <td>
+                            {{follower.id}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Node
+                        </th>
+                        <td>
+                            {{follower.node_id}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            type
+                        </th>
+                        <td>
+                            {{follower.type}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="btn-group gap-3">
+                <button type="button" class="btn btn-outline-secondary rounded" routerLink="/followers">Close</button>
+                <button type="button" class="btn btn-primary rounded" (click)="openModal()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

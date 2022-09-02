@@ -1,0 +1,41 @@
+<div class="container mt-4">
+    <div *ngIf="form.errors" class="alert alert-danger">
+        The username or password is invalid.
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h6>Reactive form example</h6>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="login()">
+                <div class="grid"> 
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input 
+                            formControlName="username"
+                            id="username" 
+                            type="text" 
+                            class="form-control">
+                        <div *ngIf="username?.pending">Validating the username...</div>
+                        <div *ngIf="username?.touched && username?.invalid" class="alert alert-danger">
+                            <div *ngIf="username?.errors?.['required']">Username is required.</div>
+                            <div *ngIf="username?.errors?.['minlength']">Username should have at least {{username?.errors?.['minlength'].requiredLength}} characters.</div>
+                            <div *ngIf="username?.errors?.['cannotContainSpace']">Username can't have spaces.</div>
+                            <div *ngIf="username?.errors?.['shouldBeUnique']">Username is already taken</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input 
+                            formControlName="password"
+                            id="password" 
+                            type="password" 
+                            class="form-control">
+                            <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">Password is required.</div>
+                        </div>
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
